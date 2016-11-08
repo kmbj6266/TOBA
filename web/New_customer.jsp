@@ -1,45 +1,50 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>New Customer Sign Up</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="new-customer-wrapper">
-            <div>Please register</div>
-            <p>${message}</p>
-            <form action="NewCustomerServlet" method="post">
-               <input type="hidden" name="action" value="add">
+ 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="/includes/header.html" />
 
-               <label class="">First Name:</label>
-               <input type="text" name="firstName" ><br>
+<div class="toba-wrapper-form register-page">
+    
+    <form action="NewCustomerServlet" method="post">
+        <div class="header">Please Register</div>
+        <h4>${message}</h4>
+        
+       <input type="hidden" name="action" value="add">
 
-               <label class="">Last Name:</label>
-               <input type="text" name="lastName" ><br>
+       <label class="">First Name:</label>
+       <input type="text" name="firstName" value="${user.firstName}" ><br>
 
-               <label class="">Phone:</label>
-               <input type="text" name="phone" ><br>
+       <label class="">Last Name:</label>
+       <input type="text" name="lastName" value="${user.lastName}" ><br>
 
-               <label class="">Address:</label>
-               <input type="text" name="address" ><br>
+       <label class="">Phone:</label>
+       <input type="text" name="phone" value="${user.phone}" ><br>
 
-               <label class="">City:</label>
-               <input type="text" name="city" ><br>
+       <label class="">Address:</label>
+       <input type="text" name="address" value="${user.address}" ><br>
 
-               <label class="">State:</label>
-               <input type="text" name="state" ><br>
+       <label class="">City:</label>
+       <input type="text" name="city" value="${user.city}" ><br>
 
-               <label class="">Zip Code:</label>
-               <input type="text" name="zipcode" ><br>
+       <label class="">State:</label>
+       <input type="text" name="state" value="${user.state}" ><br>
 
-               <label class="">Email:</label>
-               <input type="email" name="email" ><br>
+       <label class="">Zip Code:</label>
+       <input type="text" name="zipcode" value="${user.zipcode}" ><br>
 
-               <input type="submit" value="Submit" >
+       <label class="">Email:</label>
+       <input type="email" name="email" value="${user.email}" ><br>
 
-            </form>
-        </div>
-    </body>
-</html>
+       <label class="">Username:</label>
+       <input type="text" name="username" value="${user.username}"><br>
+
+        <label class="">Password:</label>
+       <input type="text" name="password" value="${user.password}"><br> 
+
+       <input type="submit" value="Submit" class="submit">
+
+    </form>
+
+    <footer>
+        <c:import url="/includes/footer.jsp" />
+    </footer>
+</div>

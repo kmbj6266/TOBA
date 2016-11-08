@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, 
                           HttpServletResponse response)
                           throws ServletException, IOException {
-        String url = "/index.html"; //have a default page
+        String url = "/index.jsp"; //have a default page
         
         //get current action
         String action = request.getParameter("action");
@@ -27,12 +27,20 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             
-            //validate if username and password match
-            if ( (username != null) && (username.equals("jsmith@toba.com")) && (password !=null) && (password.equals("letmein")) ){
-                url = "/Account_activity.html"; //logged in
+            //validate if username and password match -THIS IS OLD, FROM THE FIRST WEEK, DO WE CHANGE THIS ON 2ND ASSIGNMENT????
+            
+//            if ( (username != null) && (username.equals("jsmith@toba.com")) && (password !=null) && (password.equals("letmein")) ){
+//                url = "/Account_activity.jsp"; //logged in
+//            }
+
+
+
+            //THIS IS NEW, BECAUSE NOW, THE USERNAME IS lastName + zipcode and password is welcome1 - NOT SURE WHAT TO DO HERE????
+            if ( (username != null)  && (password !=null)  ){
+                url = "/Account_activity.jsp"; //logged in
             }
             else {
-                url = "/Login_failure.html"; //login failed
+                url = "/Login_failure.jsp"; //login failed
             }
         }
 

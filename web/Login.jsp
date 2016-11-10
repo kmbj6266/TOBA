@@ -13,7 +13,7 @@
        <input type="text" name="username" required><br>
 
        <label class="">Password:</label>
-       <input type="password" name="password" required><br>
+       <input type="text" name="password" required><br>
 
        <a href="New_customer.jsp"><p>New Customer Sign Up Page</p></a>
 

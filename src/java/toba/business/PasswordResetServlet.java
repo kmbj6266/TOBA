@@ -27,13 +27,12 @@ public class PasswordResetServlet extends HttpServlet {
             //retrieve user from the session
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
-            
-            
+                       
             //get params from request  
             String password = request.getParameter("password");
-            
-            
-
+           
+            //have to setParameter ("password") and save it back to the session
+            //why do we bind something to a page? to display something to the page.
             String messageTwo;
             if (password == null || password.isEmpty() ){
                 messageTwo = "Please type in new password";

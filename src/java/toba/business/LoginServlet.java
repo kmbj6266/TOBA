@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class LoginServlet extends HttpServlet {
@@ -27,23 +28,35 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             
-            //validate if username and password match -THIS IS OLD, FROM THE FIRST WEEK, DO WE CHANGE THIS ON 2ND ASSIGNMENT????
             
-//            if ( (username != null) && (username.equals("jsmith@toba.com")) && (password !=null) && (password.equals("letmein")) ){
-//                url = "/Account_activity.jsp"; //logged in
-//            }
-
-
-
-            //THIS IS NEW, BECAUSE NOW, THE USERNAME IS lastName + zipcode and password is welcome1 - NOT SURE WHAT TO DO HERE????
-            if ( (username != null)  && (password !=null)  ){
-                url = "/Account_activity.jsp"; //logged in
+            HttpSession session = request.getSession();
+            //session.setAttribute("user", user);
+            
+            User user = (User) session.getAttribute("user");
+            if (user == null){
+              //set url to newcustomer page
+              url = "/New_customer.jsp";
             }
+            
+            //you have to get the username by getUsername on the object
+            else if ( (username != null) && (username.equals(user.getUsername() )) && (password !=null) && (password.equals(user.getPassword() )) ){
+               url = "/Account_activity.jsp"; //logged in
+          }
             else {
                 url = "/Login_failure.jsp"; //login failed
             }
         }
 
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        
         response.setContentType("text/html");//is this needed?
         
         // page 149

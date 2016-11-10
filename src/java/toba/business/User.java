@@ -29,8 +29,8 @@ public class User implements Serializable {
         password = "";
 
     }
-    
-    public User (String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email, String username, String password){
+    //this is the Constructor i don't need to pass in username or password because I'm hard coding it in below
+    public User (String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -39,8 +39,8 @@ public class User implements Serializable {
         this.state = state;
         this.zipcode = zipcode;
         this.email = email;
-        this.username = username;
-        this.password = password;
+        this.username = lastName + zipcode;
+        this.password = "welcome1";
     }
     
     

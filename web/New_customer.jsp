@@ -32,13 +32,7 @@
        <input type="text" name="zipcode" value="${user.zipcode}" ><br>
 
        <label class="">Email:</label>
-       <input type="email" name="email" value="${user.email}" ><br>
-
-       <label class="">Username:</label>
-       <input type="text" name="username" value="${user.username}"><br>
-
-        <label class="">Password:</label>
-       <input type="text" name="password" value="${user.password}"><br> 
+       <input type="email" name="email" value="${user.email}"><br>
 
        <input type="submit" value="Submit" class="submit">
 

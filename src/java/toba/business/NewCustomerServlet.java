@@ -33,15 +33,17 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zipcode = request.getParameter("zipcode");
             String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+        
             
             //TODAY*** - i think i need to store data here for the user object
-            User user = new User(firstName, lastName, phone, address, city, state, zipcode, email, username, password);
+            User user = new User(firstName, lastName, phone, address, city, state, zipcode, email);
+            
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             
-            //set a variable named "message" here, then validate parameters, and display message if empty fields
+            //set a variable named "message" here, then validate parameters, and display message 
+            //if all the fields are null or empty then display message (stays on the New_customer page
+            
             String message;
             if (firstName == null || firstName.isEmpty() ||
                 lastName == null || lastName.isEmpty() ||
@@ -50,39 +52,21 @@ public class NewCustomerServlet extends HttpServlet {
                 city == null || city.isEmpty() ||
                 state == null || state.isEmpty() ||
                 zipcode == null || zipcode.isEmpty() ||
-                email == null || email.isEmpty() ||
-                username == null || username.isEmpty() ||
-                password == null || password.isEmpty()
+                email == null || email.isEmpty() 
+            
               ){
-                message = "Please fill out all the form fields correctly";
+                message = "Please fill out all the form fields";
                 url = "/New_customer.jsp";
             }
-            //if username = lastName + zipcode && password = welcome1, send them to Success.jsp page
-            else if ( 
-                (firstName != null) && 
-                (lastName != null) && 
-                (phone != null) && 
-                (address != null) && 
-                (city != null) && 
-                (state != null) && 
-                (zipcode != null) && 
-                (username != null) && (username.equals(lastName + zipcode)) && 
-                (password != null) && (password.equals("welcome1")) ){
+            //else because all the form fields are filled in, it goes to the successs page
+            else {         
                 message = "";
                 url = "/Success.jsp";
+                
                 //TODAY ** --- we dont' have a real database - make a fake one
                 //UserDB.insert(user);
             }
-            
-            //otherwise, tell them their username and password are incorrect???
-            else {
-                message = "Your username and password are incorrect.";
-                url = "/New_customer.jsp";
-                //TODAY ** --- we dont' have a real database - make a fake one
-                //UserDB.insert(user);
-            }
-
-            
+                       
             request.setAttribute("message", message);
             
             //TODAY*** - i think we are setting the request attribute to user
@@ -93,7 +77,7 @@ public class NewCustomerServlet extends HttpServlet {
         response.setContentType("text/html");//is this needed?
         
         // page 149
-    getServletContext()
+      getServletContext()
      .getRequestDispatcher(url)
      .forward(request, response);
 

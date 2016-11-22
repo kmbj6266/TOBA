@@ -2,6 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
 <div class="toba-wrapper display-form">
+    <ul>
+        <li><a href="index.jsp">Home</a></li>   
+        <li><a href="Login.jsp">Login</a></li>   
+        <li><a href="New_customer.jsp">New Customer</a></li> 
+        <li><a href="Account_activity.jsp">Account Activity</a></li> 
+        <li><a href="Transaction.jsp">Transactions</a></li> 
+    </ul>
+    
     <h3>Congratulations, your account has been successfully created</h3>
 
     <!--TODAY ADDED THIS FOR PART A#4-->

@@ -1,8 +1,16 @@
 package toba.business;
 
 import java.io.Serializable;
-        
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+   
+@Entity
 public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
     private String firstName;
     private String lastName;
     private String phone;
@@ -13,24 +21,10 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
-    
-    
-    //DON'T FORGET TO ADD BACK USERNAME AND PASSWORD, USERNAME IS CONCATENATED
-    public User (){
-        firstName = "";
-        lastName = "";
-        phone = "";
-        address = "";
-        city = "";
-        state = "";
-        zipcode = "";
-        email = ""; 
-        username = "";
-        password = "";
 
-    }
-    //this is the Constructor i don't need to pass in username or password because I'm hard coding it in below
-    public User (String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email){
+
+    //commented out on 11/21/16 ********this is the Constructor i don't need to pass in username or password because I'm hard coding it in below
+    public User (String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email, String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -39,10 +33,32 @@ public class User implements Serializable {
         this.state = state;
         this.zipcode = zipcode;
         this.email = email;
-        this.username = lastName + zipcode;
-        this.password = "welcome1";
+        this.username = username;
+        this.password = password;
+        //11/21/16 NO LONGER HARD CODING username and password!!!... MUST GO INTO DATABASE AND GET FROM DATABASE NOW
+        
+    //commented this out 11/21/16
+        //username is HARD CODED HERE, THE USERNAME IS the Last Name and Zipcode of the user
+        //this.username = lastName + zipcode;
+        //HARD CODED HERE password here!!!
+        //this.password = "welcome1";
+        
+    }
+
+    User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    User(String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
     
     public String getFirstName() {
         return firstName;

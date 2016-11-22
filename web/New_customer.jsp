@@ -4,6 +4,14 @@
 
 <div class="toba-wrapper-form register-page">
     
+    <ul>
+        <li><a href="index.jsp">Home</a></li>   
+        <li><a href="Login.jsp">Login</a></li>   
+        <li><a href="New_customer.jsp">New Customer</a></li> 
+        <li><a href="Account_activity.jsp">Account Activity</a></li> 
+        <li><a href="Transaction.jsp">Transactions</a></li> 
+    </ul>
+    
     <form action="NewCustomerServlet" method="post">
         <div class="header">Please Register</div>
         <h4>${message}</h4>
@@ -33,6 +41,12 @@
 
        <label class="">Email:</label>
        <input type="email" name="email" value="${user.email}"><br>
+       
+       <label class="">Username:</label>
+       <input type="text" name="username" value="${user.username}" ><br>
+       
+       <label class="">Password:</label>
+       <input type="text" name="password" value="${user.password}" ><br>
 
        <input type="submit" value="Submit" class="submit">
 

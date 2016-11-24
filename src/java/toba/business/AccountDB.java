@@ -1,15 +1,12 @@
 package toba.business;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import toba.data.DBUtil;
-//import toba.business.Account;
-//import toba.business.AccountDB;
 
-public class AccountDB {
-    
+public class AccountDB {   
     public static void insert(Account account) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -26,8 +23,7 @@ public class AccountDB {
             em.close();
         }
     }
-
-    
+   
  public static void update(Account account) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -45,28 +41,32 @@ public class AccountDB {
             
         }  
 }
- public static Account selectAccount(User user, String acctType) {
+ public static Account selectAccount(User user, String account) {
      EntityManager em = DBUtil.getEmFactory().createEntityManager();
-     List<Account> accounts = null;
-     Account selected = null;
-     try {
-        String qString = "Select a from Account a " +
-                       "Where a.accountOwner = :user";
+     
+        String qString = "SELECT a FROM Account a " +
+                "WHERE a.user = :user AND a.accountType = :ACCOUNT";
         TypedQuery<Account> q = em.createQuery(qString, Account.class); 
         q.setParameter("user", user);
-     
-        accounts = q.getResultList();
-        for(Account a: accounts){
-            if (a.getAccountType() == null ? acctType == null : a.getAccountType().equals(acctType))
-                selected = a;
-        }
-       
-    } finally {
+        q.setParameter("ACCOUNT", account);
+      try {
+          Account a = q.getSingleResult();
+          return a;
+      } catch (NoResultException e){
+          return null;
+      } finally {
          em.close();
-    }
-     
-     return selected;
+        }
+
+     }
  }
-}
- 
+
+
+ //      
+//     
+//        accounts = q.getResultList();
+//        for(Account a: accounts){
+//            if (a.getAccountType() == null ? account == null : a.getAccountType().equals(account))
+//                selected = a;
+//        }
 

@@ -11,36 +11,37 @@ public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long transactionId;
-    private Account sourceAccnt;
-    private Account destinationAccnt;
+    private Account source;
+    private Account destination;
     
     private double amount;
     
+    public Transaction() {}
     /**
      *
-     * @param sourceAccnt
-     * @param destinationAccnt
+     * @param source
+     * @param destination
      * @param amount
      */
-    public Transaction(Account sourceAccnt, Account destinationAccnt, double amount) {
-        this.sourceAccnt = sourceAccnt;
-        this.destinationAccnt = destinationAccnt;
+    public Transaction(Account source, Account destination, double amount) {
+        this.source = source;
+        this.destination = destination;
         this.amount = amount;
     }
     
-    public Account getSourceAccnt() {
-        return sourceAccnt;
+    public Account getSource() {
+        return source;
     }
 
-    public void setSourceAccnt(Account sourceAccnt) {
-        this.sourceAccnt = sourceAccnt;
+    public void setSource(Account source) {
+        this.source = source;
     }
 
-    public Account getDestinationAccnt() {
-        return destinationAccnt;
+    public Account getDestination() {
+        return destination;
     }
-    public void setDestinationAccnt(Account destinationAccnt) {
-        this.destinationAccnt = destinationAccnt;
+    public void setDestination(Account destination) {
+        this.destination = destination;
     }
     public double getAmount() {
         return amount;

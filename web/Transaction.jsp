@@ -1,26 +1,16 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
+<!--KATHY BORNE-->
+<h1>Welcome To Your Transactions Page</h1>
 
-<div class="toba-wrapper-form">
-    <ul>
-        <li><a href="index.jsp">Home</a></li>   
-        <li><a href="Login.jsp">Login</a></li>   
-        <li><a href="New_customer.jsp">New Customer</a></li> 
-        <li><a href="Account_activity.jsp">Account Activity</a></li> 
-        <li><a href="Transaction.jsp">Transactions</a></li> 
-    </ul>
+<h2>Your Balances: </h2>
+  <h3 class="balance-header">Checking Account: ${user.checkingBalance}</h3>
+    <h3 class="balance-header">Savings Account: ${user.savingsBalance}</h3>
 
-<div>Welcome To Your Transactions Page</div>
-
-<h1>Your balances: </h1>
-    <h2>Checking Account: ${user.checkingBalance}</h2>
-    <h2>Savings Account : ${user.savingsBalance}</h2>
-        
-    <h2>Transfer from</h2>
-      <form action="Account_activity.jsp" method="post">
-          <div>
-            <label>From:</label>
+      <form action="TransactionServlet" method="post">
+          <div class="transfer">
+            <label>Transfer From:</label>
             <select name = "From">
               <option value="select"> </option>
               <option value="CHECKING">Checking</option>
@@ -28,15 +18,14 @@
             </select>
           </div>
 
-      <h2>Transfer To</h2>
-           <div>
-            <label>To:</label>
-            <select name="To">
-              <option value="select"> </option>    
-              <option value="CHECKING">Checking</option>
-              <option value="SAVINGS">Savings</option>                        
-            </select>
-           </div>
+         <div class="transfer">
+          <label>Transfer To:</label>
+          <select name="To">
+            <option value="select"> </option>    
+            <option value="CHECKING">Checking</option>
+            <option value="SAVINGS">Savings</option>                        
+          </select>
+         </div>
 
       <div>
         <label>Enter Transfer Amount:</label>
@@ -46,10 +35,12 @@
       <input type="submit" value="Submit Transfer">
       </form>
 
-    <div>
-        <a href="Account_activity.jsp">See Account Activity</a>
-    </div>
-        
-        
+<div>
+    <a href="Account_activity.jsp">See Account Activity</a>
 </div>
-<c:import url="/includes/footer.jsp" />
+
+ 
+ 
+<footer>      
+    <c:import url="/includes/footer.jsp" />
+</footer>

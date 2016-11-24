@@ -1,15 +1,8 @@
  <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header.html" />
-<div class="toba-wrapper display-form">
-    <ul>
-        <li><a href="index.jsp">Home</a></li>   
-        <li><a href="Login.jsp">Login</a></li>   
-        <li><a href="New_customer.jsp">New Customer</a></li> 
-        <li><a href="Account_activity.jsp">Account Activity</a></li> 
-        <li><a href="Transaction.jsp">Transactions</a></li> 
-    </ul>
-    
+<div class="display-form">
+  
     <h3>Congratulations, your account has been successfully created</h3>
 
     <!--TODAY ADDED THIS FOR PART A#4-->
@@ -45,7 +38,7 @@
     <label>Password:</label>
     <span>${user.password}</span><br>
 
-    <footer>      
-        <c:import url="/includes/footer.jsp" />
-    </footer>
+<footer>      
+    <c:import url="/includes/footer.jsp" />
+</footer>
 </div>

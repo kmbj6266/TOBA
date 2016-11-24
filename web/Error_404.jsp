@@ -3,4 +3,6 @@
 
         <h1>Error 404 page. File not found. Dang!</h1>
         
-<c:import url="/includes/footer.jsp" />
+<footer>    
+    <c:import url="/includes/footer.jsp" />
+</footer>   

@@ -1,7 +1,7 @@
 package toba.business;
-import java.io.*;
+//import java.io.*;
 import java.io.IOException;
-import javax.servlet.*;
+//import javax.servlet.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +25,7 @@ public class NewCustomerServlet extends HttpServlet {
         }
    
         if (action.equals("add")){
-                 //get params from request   
-            
+            //get params from request              
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String phone = request.getParameter("phone");
@@ -35,13 +34,10 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zipcode = request.getParameter("zipcode");
             String email = request.getParameter("email"); 
-            //String username = request.getParameter("username");
-            //String password = request.getParameter("password");
             String userName = lastName + zipcode;
             String passWord = "welcome1";
-            
-           
-            User user = new User();
+                    
+            User user = null;
             
             String message = "";
             HttpSession session = request.getSession();
@@ -54,20 +50,22 @@ public class NewCustomerServlet extends HttpServlet {
                 city == null || city.isEmpty() ||
                 state == null || state.isEmpty() ||
                 zipcode == null || zipcode.isEmpty() ||
-                email == null || email.isEmpty() ){
+                email == null || email.isEmpty() ) {
+                
                     message = "Please fill out all the form fields";
                     url = "/New_customer.jsp";
             }
              
             ////**** ADDED THIS ON 11/20/16 - VALIDATE the parameters HERE
-            else if(UserDB.emailExists(user.getEmail())){
-               message = "This email address already exists.<br>" +
-                        "Please enetr another email address.";
-                url = "/New_customer.jsp";
-                
-            }
+//            else if(UserDB.emailExists(email)){
+//               message = "This email address already exists.<br>" +
+//                        "Please enetr another email address.";
+//                url = "/New_customer.jsp";
+//                
+//            }
             
            else {
+            
             user = new User(firstName, lastName, phone, address, city, state, zipcode, email);        
             UserDB.insert(user);
 

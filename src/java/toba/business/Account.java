@@ -68,7 +68,6 @@ public class Account implements Serializable {
         this.user = user;
     }
     
-    
     public void credit(double startingBalance){
         this.startingBalance += startingBalance;
     }

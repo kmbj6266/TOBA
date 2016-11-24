@@ -9,5 +9,6 @@
 
 
 <p>&copy; Copyright - <fmt:formatDate value="${now}" dateStyle="long"/> -  Kathy Borne,  Web Developer</p>
+</div>
 </body>
 </html>

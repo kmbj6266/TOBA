@@ -54,12 +54,13 @@ public class UserDB {
         }       
     }
 
-    public static User selectUser(String email) {
+    public static User selectUser(String username, String password) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT u FROM User u " +
-                "WHERE u.email = :email";
+                "WHERE u.username = :username AND u.password = :password";
         TypedQuery<User> q = em.createQuery(qString, User.class);
-        q.setParameter("email", email);
+        q.setParameter("username", username);
+        q.setParameter("password", password);
         try {
             User user = q.getSingleResult();
             return user;
@@ -70,8 +71,17 @@ public class UserDB {
         }
     }
 
-    public static boolean emailExists(String email) {
-        User u = selectUser(email);   
+//    public static boolean emailExists(String email) {
+//        User u = selectUser(email);   
+//        return u != null;
+//    }
+
+//     public static boolean emailExists(String email) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
+    public static boolean userExists(String username, String password) {
+        User u = selectUser(username, password);
         return u != null;
     }
 }

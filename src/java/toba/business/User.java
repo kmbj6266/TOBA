@@ -24,7 +24,8 @@ public class User implements Serializable {
 
 
     //commented out on 11/21/16 ********this is the Constructor i don't need to pass in username or password because I'm hard coding it in below
-    public User (String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email, String username, String password){
+    public User (String firstName, String lastName, String phone, 
+            String address, String city, String state, String zipcode, String email){
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -33,8 +34,10 @@ public class User implements Serializable {
         this.state = state;
         this.zipcode = zipcode;
         this.email = email;
-        this.username = username;
-        this.password = password;
+        this.username = lastName + zipcode;
+        this.password = "welcome1";
+//        this.checkingBalance = checkingBalance;
+//        this.savingsBalance = savingsBalance;
         //11/21/16 NO LONGER HARD CODING username and password!!!... MUST GO INTO DATABASE AND GET FROM DATABASE NOW
         
     //commented this out 11/21/16
@@ -45,13 +48,21 @@ public class User implements Serializable {
         
     }
 
-    User() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User() {
+        firstName = "";
+        lastName = "";
+        phone = "";
+        address = "";
+        city = "";
+        state = "";
+        zipcode = "";
+        email = "";
+        username = "";
+        password = "";
+//        checkingBalance = "";
+//        savingsBalance = "";
     }
 
-    User(String firstName, String lastName, String phone, String address, String city, String state, String zipcode, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public Long getUserId() {
         return userId;
@@ -128,6 +139,23 @@ public class User implements Serializable {
     }
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    //not sure if this is being used
+    public double getCheckingBalance() {
+        Account checking = AccountDB.selectAccount(this, "checking");
+        if (checking != null)
+            
+            return checking.getStartingBalance();
+        return 0.00;
+    }
+    
+//not sure if this is being used
+    public double getSavingsBalance() {
+        Account savings = AccountDB.selectAccount(this, "savings");
+        if (savings != null)
+            return savings.getStartingBalance();
+        return 0.00;
     }
     
     

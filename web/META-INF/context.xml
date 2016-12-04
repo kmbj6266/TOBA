@@ -13,5 +13,14 @@
         type="javax.sql.DataSource"
         url="jdbc:mysql://localhost:8889/toba?autoReconnect=true" 
         username="root"/>  
-
+    
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" debug="99"
+        dataSourceName="toba"
+         connectionURL="jdbc:mysql://localhost:8889/toba"
+        localDataSource="true"
+        userTable="UserPass" 
+        userNameCol="Username"
+        userCredCol="Password"
+        userRoleTable="UserRole"
+        roleNameCol="Rolename" />
 </Context>

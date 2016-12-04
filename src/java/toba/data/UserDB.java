@@ -1,5 +1,6 @@
 package toba.data;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
@@ -70,6 +71,69 @@ public class UserDB {
             em.close();
         }
     }
+    
+    
+    
+    
+    
+    //not sure if this is correct???? 12/3/2016
+    
+    public static User selectUsers(String userName)
+    {
+        //Create connection using the connection pool
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT u FROM User u " +
+                        "WHERE u.userName = :userName";
+        TypedQuery<User> q = em.createQuery(qString, User.class);
+        q.setParameter("userName", userName);
+        
+        try
+        {
+            User user = q.getSingleResult();
+            return user;
+        }
+        catch(NoResultException e)
+        {
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+    //not sure if this is correct???? 12/3/2016
+    public static List<User> selectAllUsers()
+    {
+        //Create connection using the connection pool
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT u FROM User u ";
+        TypedQuery<User> q = em.createQuery(qString, User.class);
+        
+        List<User> allUsers;
+        
+        try
+        {
+            allUsers = q.getResultList();
+            if(allUsers == null || allUsers.isEmpty())
+                allUsers = null;
+        }
+        finally
+        {
+            em.close();
+        }
+        return allUsers;
+    }
+    
+    //end of new code on 12/3/2016
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 //    public static boolean emailExists(String email) {
 //        User u = selectUser(email);   

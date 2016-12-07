@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                              
-                             http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
-    
-    
-    <!--How to set a security constrainst in a web.xml file page 507 - security-roles - one for customer service and one for Sys Admin--> 
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee         http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
+    <!--How to set a security constrainst in a web.xml file page 507 - security-roles - one for customer service and one for Sys Admin-->
     <security-role>
         <description>Customer Service</description>
         <role-name>service</role-name>
@@ -14,20 +9,18 @@
         <description>Administrator</description>
         <role-name>admin</role-name>
     </security-role>
-    
     <!--Restricts access to Admin folder/sub directory continued on page 507-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Area</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
-            <!--Authorize admins to connect -->
-            <auth-constraint>
-                <role-name>service</role-name>
-                <role-name>admin</role-name>
-            </auth-constraint>
+        <!--Authorize admins to connect -->
+        <auth-constraint>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
     </security-constraint>
-    
     <!-- Login-config page 519 -->
     <login-config>
         <auth-method>FORM</auth-method>
@@ -36,20 +29,7 @@
             <form-error-page>/admin/login_error.html</form-error-page>
         </form-login-config>
     </login-config>
-    
-    
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-   <!-- servlet stuff -->
+    <!-- servlet stuff -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>toba.business.LoginServlet</servlet-class>
@@ -70,6 +50,18 @@
         <servlet-name>ReportsServlet</servlet-name>
         <servlet-class>toba.business.ReportsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginAdminServlet</servlet-name>
+        <servlet-class>toba.business.LoginAdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SpreadsheetReport</servlet-name>
+        <servlet-class>toba.business.SpreadsheetReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportSpreadSheetServlet</servlet-name>
+        <servlet-class>toba.business.ReportSpreadSheetServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -88,7 +80,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReportsServlet</servlet-name>
-        <url-pattern>/ReportsServlet</url-pattern>
+        <url-pattern>/reportsservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginAdminServlet</servlet-name>
+        <url-pattern>/LoginAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SpreadsheetReport</servlet-name>
+        <url-pattern>/SpreadsheetReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportSpreadSheetServlet</servlet-name>
+        <url-pattern>/ReportSpreadSheetServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

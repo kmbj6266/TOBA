@@ -3,42 +3,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reports Page</title>
-        <link rel="stylesheet" href="../styles/toba_styles.css" type="text/css"/>
-    </head>
-    <body>
-        <div class="toba-wrapper">   
-            <nav>  
-                <ul>
-                    <li></li>  
-                </ul>
-            </nav> 
+<c:import url="../includes/header.html" />
         
         <h3>Users that have registered this month</h3>
+ 
+        <form action="../reportsservlet" method="POST">
+            <input hidden="runUserReport" name ="report" value="runReport" />
+            <input type="submit" name ="userReport" value="Get Report" />
+        </form>
         
-         <table>
-            <tr>               
+        <br><br>
+
+        <c:if test="${!empty sessionScope.user}">
+            
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Username</th>
-            </tr>        
-            <c:forEach items="${allUsers}" var="users">
-            <tr>
-                <td>${user.getFirstName()}</td>
-                <td>${user.getLastName()}</td>
-                <td>${user.getUserName()}</td> 
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
             </tr>
-            </c:forEach>            
+
+            <c:forEach var="userReport" items="${sessionScope.userMonthReport}" >
+                <tr>
+                    <td><c:out value="${userReport.userId}"/></td>
+                    <td><c:out value="${userReport.userName}" /></td>
+                    <td><c:out value="${userReport.firstName}" /></td>
+                    <td><c:out value="${userReport.lastName}"/></td>
+                    <td><c:out value="${userReport.email}"/></td>
+                    <td><c:out value="${userReport.phone}" /></td>
+                    <td><c:out value="${userReport.address}" /></td>
+                    <td><c:out value="${userReport.city}"/></td>
+                    <td><c:out value="${userReport.state}"/></td>
+                    <td><c:out value="${userReport.zipCode}" /></td>
+                </tr>
+            </c:forEach>
         </table>
-        
-        <footer>
-                <p>&copy; Copyright - Kathy Borne,  Web Developer</p>
-            </footer>
-        
-        </div>
-    </body>
-</html>
+
+        <br><br>
+
+            <form action="reportspreadsheetservlet" method="GET">
+                <input hidden="DownloadRSS" name ="DownloadRSS" value="DownloadRSS" />
+                <input type="submit" name ="DownloadRSS" value="Download Report" />
+            </form>
+            
+        </c:if>
+
+<footer>  
+    <c:import url="../includes/footer.jsp" />
+</footer>
+       

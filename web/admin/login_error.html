@@ -2,11 +2,38 @@
 
 <html>
     <head>
-        <title>Admin Login Error Page</title>
+        <title>admin login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/toba_styles.css" type="text/css"/>
     </head>
-    <body>
-        <div>Admin Login Error, please use correct username and password.</div>
+    <body> 
+        <div class="toba-wrapper">   
+            <nav>  
+                 <ul class="nav-buttons">
+                    <li><a href="index.jsp">Home</a></li>   
+                    <li><a href="Login.jsp">Login</a></li>   
+                    <li><a href="New_customer.jsp">New Customer</a></li> 
+                    <li><a href="Account_activity.jsp">Account Activity</a></li> 
+                    <li><a href="Transaction.jsp">Transactions</a></li> 
+                    <li><a href="admin/reports.jsp">Administration</a></li> 
+                </ul>
+            </nav> 
+            <h1>Admin Login Error, please use correct username and password.</h1>
+            
+            <form action="j_security_check" method="post">
+                <label>Username</label>
+                <input type="text" name="j_username"><br>
+                <label>Password</label>
+                <input type="text" name="j_password"><br>
+                <label>&nbsp;</label><br>
+                <input type="submit" value="Login">
+            </form>
+   
+            <footer>
+                <p>&copy; Copyright - Kathy Borne,  Web Developer</p>
+            </footer>
+        </div>
     </body>
 </html>
+

@@ -7,16 +7,17 @@
         logAbandoned="true" 
         maxActive="100" maxIdle="30" maxWait="10000"
         name="toba"
-        password="" 
+        username="root"
+        password="1234" 
         removeAbandoned="true" 
         removeAbandonedTimeout="60"
         type="javax.sql.DataSource"
         url="jdbc:mysql://localhost:8889/toba?autoReconnect=true" 
-        username="root"/>  
+        />  
     
     <Realm className="org.apache.catalina.realm.DataSourceRealm" debug="99"
+        connectionURL="jdbc:mysql://localhost:8889/toba"
         dataSourceName="toba"
-         connectionURL="jdbc:mysql://localhost:8889/toba"
         localDataSource="true"
         userTable="UserPass" 
         userNameCol="Username"

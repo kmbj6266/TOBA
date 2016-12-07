@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * kathy borne
  */
 package toba.business;
 
@@ -16,49 +14,67 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@WebServlet(name = "ReportsServlet", urlPatterns = {"/ReportsServlet"})
+
+@WebServlet(urlPatterns = {"/ReportsServlet"})
 public class ReportsServlet extends HttpServlet {
+
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        System.out.println("here i am");
+        
+        String url = "/admin/reports.jsp";
+        
+        String report = request.getParameter("report");
+           
+        if(report != null) {
+          
+            HttpSession session = request.getSession();
+              
+            //get the current month/yr for report
+            DateFormat df = new SimpleDateFormat("MM/yyyy");
+            Date Date = new Date();
+            String currDate = df.format(Date);
+        
+        
+            // Call the database for the report with the current month and year
+            List<User> userMonthReport = toba.db.UserDB.selectUserMonthReport(currDate);
+            
+            // Save the report data to the Session so it can be displayed on reports.jsp
+            session.setAttribute("userMonthReport", userMonthReport);
+            
+            
+            // Return to reports.jsp page with results from session
+            url = "/admin/reports.jsp";
+        
+        }
+        else {
+            
+            // Return to reports.jsp no results so display nothing.
+            url = "/admin/reports.jsp";
+
+        }
+        
+        getServletContext()
+        .getRequestDispatcher(url)
+        .forward(request, response);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String url = "/admin/reports.jsp";
-        
-        //Getting/Creating a session
-        HttpSession session = request.getSession();
-        
-        try{
-            //Retrieve users from DB
-            List resultsFromQuery = UserDB.selectAllUsers();         
-            
-            //Create an arrayList of all Users
-            ArrayList<User> allUsers = new ArrayList<>();
-            allUsers.addAll(resultsFromQuery);
-                  
-            boolean show = true;
-            //Set all attributes
-            request.setAttribute("allUsers", allUsers);
-            request.setAttribute("show", show);
-            
-        }
-        catch(Exception e)
-        {
-            this.log(e.toString());
-            System.out.println("Unable to complete request");
-        }
-        
-        getServletContext()
-            .getRequestDispatcher(url)
-            .forward(request, response); 
-        
+        processRequest(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response); 
+        processRequest(request, response);
     }
 
 }
